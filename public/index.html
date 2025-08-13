@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Sysnox – Neon Snake</title>
+    <meta
+      name="description"
+      content="Neon Snake par Sysnox — un Snake moderne avec sons, bonus et classement."
+    />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext y='48' x='6' font-size='48'%3E%F0%9F%90%8D%3C/text%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">🐍 <span>Neon Snake</span> <em>by Sysnox</em></div>
+      <nav class="actions">
+        <button id="btn-play" class="btn primary">Jouer</button>
+        <button id="btn-pause" class="btn">Pause</button>
+        <button id="btn-stop" class="btn">Stop</button>
+        <button id="btn-sound" class="btn">Son: On</button>
+        <button id="btn-settings" class="btn">Options</button>
+        <button id="btn-fullscreen" class="btn">Plein écran</button>
+      </nav>
+    </header>
+
+    <main class="container">
+      <section class="board-wrap">
+        <canvas id="board" width="660" height="660"></canvas>
+
+        <div class="hud">
+          <div class="pill">Score: <b id="score">0</b></div>
+          <div class="pill">Meilleur: <b id="best">0</b></div>
+        </div>
+
+        <div class="dpad" id="dpad">
+          <button data-dir="U">▲</button>
+          <div class="mid">
+            <button data-dir="L">◀</button>
+            <button data-dir="R">▶</button>
+          </div>
+          <button data-dir="D">▼</button>
+        </div>
+      </section>
+
+      <aside class="sidebar">
+        <h2>Personnalisation</h2>
+        <div class="field">
+          <label>Thème</label>
+          <select id="theme">
+            <option value="neon">Neon</option>
+            <option value="pastel">Pastel</option>
+            <option value="dark">Sombre</option>
+            <option value="cyberpunk">Cyberpunk</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Vitesse: <span id="speedLabel">9</span> tps</label>
+          <input id="speed" type="range" min="2" max="20" step="1" value="9" />
+        </div>
+
+        <div class="grid-2">
+          <div class="field">
+            <label>Colonnes: <span id="colsLabel">22</span></label>
+            <input
+              id="cols"
+              type="range"
+              min="12"
+              max="36"
+              step="1"
+              value="22"
+            />
+          </div>
+          <div class="field">
+            <label>Lignes: <span id="rowsLabel">22</span></label>
+            <input
+              id="rows"
+              type="range"
+              min="12"
+              max="36"
+              step="1"
+              value="22"
+            />
+          </div>
+        </div>
+
+        <div class="toggles">
+          <label><input id="wrap" type="checkbox" /> Traverser les murs</label>
+          <label><input id="grid" type="checkbox" checked /> Grille</label>
+        </div>
+
+        <h2>Classement</h2>
+        <ol id="leaderboard" class="board"></ol>
+
+        <p class="hint">
+          Astuce: Espace = Pause/Play • Entrée = Démarrer. Les bonus brillants
+          valent +30. Ton meilleur score est sauvé.
+        </p>
+      </aside>
+    </main>
+
+    <!-- Game Over Modal -->
+    <dialog id="gameover">
+      <h3>Partie terminée</h3>
+      <p>Score: <b id="finalScore">0</b></p>
+      <form method="dialog" id="scoreForm">
+        <label
+          >Nom:
+          <input
+            id="playerName"
+            name="name"
+            maxlength="16"
+            placeholder="Sysnox"
+          />
+        </label>
+        <menu>
+          <button value="cancel" class="btn">Fermer</button>
+          <button value="submit" class="btn primary">Envoyer le score</button>
+        </menu>
+      </form>
+    </dialog>
+
+    <footer class="foot">
+      <small>© <span id="year"></span> Sysnox</small>
+    </footer>
+
+    <script type="module" src="./app.js"></script>
+    <script>
+      // Empêche le scroll avec les flèches directionnelles
+      window.addEventListener(
+        "keydown",
+        function (e) {
+          if (
+            ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(e.key)
+          ) {
+            e.preventDefault();
+          }
+        },
+        false
+      );
+    </script>
+  </body>
+</html>

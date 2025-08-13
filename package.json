@@ -1,0 +1,25 @@
+{
+  "name": "sysnox-neon-snake",
+  "version": "1.0.0",
+  "description": "Snake neon game by Sysnox – frontend (HTML/CSS/JS) + backend (Node/Express) with leaderboard.",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "snake",
+    "canvas",
+    "game",
+    "neon",
+    "leaderboard"
+  ],
+  "author": "Sysnox",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "helmet": "^7.1.0"
+  }
+}
